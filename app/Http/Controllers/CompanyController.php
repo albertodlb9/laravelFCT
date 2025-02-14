@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Company;
 
 class CompanyController extends Controller
 {
@@ -11,7 +12,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        return Company::all();
     }
 
     /**
@@ -19,7 +20,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('companies.create');
     }
 
     /**
@@ -27,7 +28,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Company::create($request->all());
     }
 
     /**
@@ -35,7 +36,7 @@ class CompanyController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Company::find($id);
     }
 
     /**
@@ -43,7 +44,8 @@ class CompanyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $company = Company::find($id);
+        return view('companies.edit', compact('company'));
     }
 
     /**
@@ -51,7 +53,8 @@ class CompanyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $company = Company::find($id);
+        $company->update($request->all());
     }
 
     /**
@@ -59,6 +62,7 @@ class CompanyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $company = Company::find($id);
+        $company->delete();
     }
 }

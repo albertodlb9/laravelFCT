@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Action;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class ActionController extends Controller
      */
     public function index()
     {
-        //
+        return Action::all();
     }
 
     /**
@@ -19,7 +20,7 @@ class ActionController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -27,7 +28,7 @@ class ActionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Action::create($request->all());
     }
 
     /**
@@ -35,7 +36,7 @@ class ActionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Action::find($id);
     }
 
     /**
@@ -43,7 +44,7 @@ class ActionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -51,7 +52,8 @@ class ActionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $action = Action::find($id);
+        $action->update($request->all());
     }
 
     /**
@@ -59,6 +61,6 @@ class ActionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Action::destroy($id);
     }
 }

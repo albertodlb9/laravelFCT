@@ -1,0 +1,26 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2>Actualizar Empresa</h2>
+    </x-slot>
+
+    <form action="{{ route('companies.update', $company->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <label for="name">Nombre de la Empresa:</label>
+        <input type="text" name="name" id="name" value="{{ $company->name }}">
+        <br>
+        <label for="cif">CIF:</label>
+        <input type="text" name="cif" id="cif" value="{{ $company->cif }}">
+        <br>
+        <label for="address">Dirección:</label>
+        <input type="text" name="address" id="address" value="{{ $company->address }}">
+        <br>
+        <label for="contact_email">Correo Electrónico:</label>
+        <input type="email" name="contact_email" id="contact_email" value="{{ $company->contact_email }}">
+        <br>
+        <label for="tlfn">Teléfono de Contacto:</label>
+        <input type="text" name="tlfn" id="tlfn" value="{{ $company->tlfn }}">
+        <br>
+        <button type="submit">Guardar Empresa</button>
+    </form>
+</x-app-layout>
