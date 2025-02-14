@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Action;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ActionController extends Controller
 {
@@ -20,7 +21,7 @@ class ActionController extends Controller
      */
     public function create()
     {
-        
+        return view('actions.create');
     }
 
     /**
@@ -44,7 +45,9 @@ class ActionController extends Controller
      */
     public function edit(string $id)
     {
-        
+        $action = Action::find($id);
+        $pupils = User::where('rol_id', '2')->get();
+        return view('actions.edit', compact('data', 'pupils'));
     }
 
     /**
