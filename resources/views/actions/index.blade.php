@@ -17,6 +17,9 @@
                     <th class="p-3 border border-gray-300">Descripcion</th>
                     <th class="p-3 border border-gray-300">Fecha</th>
                     <th class="p-3 border border-gray-300">Duracion</th>
+                    @if(Auth::user()->hasRole('teacher','pupil'))
+                    <th class="p-3 border border-gray-300">Acciones</th>
+                    @endif
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -26,11 +29,27 @@
                         <td class="p-3 border border-gray-300">{{ $action->description }}</td>
                         <td class="p-3 border border-gray-300">{{ $action->date }}</td>
                         <td class="p-3 border border-gray-300">{{ $action->interval }}</td>
+                        @if(Auth::user()->hasRole('teacher','pupil'))
+                        <td class="p-3 border border-gray-300 flex gap-2">
+                            <a href="{{ route('actions.edit', $action->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold btn">Editar</a>
+                            <form action="{{ route('actions.destroy', $action->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition">Eliminar</button>
+                            </form>
+                        </td>
+                        @endif
                     </tr>
                     @endif
                 @endforeach
             </tbody>
+            
         </table>
+        <div class="mt-4">
+            <a href="{{ route('actions.create',['id' => Auth::user()->id]) }}" class="inline-block bg-green px-4 py-2 rounded-md hover:bg-green-700 transition">
+                Crear Tarea
+            </a>
+        </div>
         @endif
         @if(Auth::user()->hasRole('teacher','tutor'))
         @foreach($users as $user)
@@ -48,6 +67,9 @@
                     <th class="p-3 border border-gray-300">Descripcion</th>
                     <th class="p-3 border border-gray-300">Fecha</th>
                     <th class="p-3 border border-gray-300">Duracion</th>
+                    @if(Auth::user()->hasRole('teacher','pupil'))
+                    <th class="p-3 border border-gray-300">Acciones</th>
+                    @endif
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -57,14 +79,32 @@
                         <td class="p-3 border border-gray-300">{{ $action->description }}</td>
                         <td class="p-3 border border-gray-300">{{ $action->date }}</td>
                         <td class="p-3 border border-gray-300">{{ $action->interval }}</td>
+                        @if(Auth::user()->hasRole('teacher','pupil'))
+                        <td class="p-3 border border-gray-300 flex gap-2">
+                            <a href="{{ route('actions.edit', $action->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold btn">Editar</a>
+                            <form action="{{ route('actions.destroy', $action->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition">Eliminar</button>
+                            </form>
+                        </td>
+                        @endif
                     </tr>
                     @endif
                 @endforeach
             </tbody>
         </table>
+        
         @endif
+        
         @endforeach
+        <div class="mt-4">
+            <a href="{{ route('actions.create',$user->id) }}" class="inline-block bg-green px-4 py-2 rounded-md hover:bg-green-700 transition">
+                Crear Tarea
+            </a>
+        </div>
         @endif
+</div>
 
 
 </x-app-layout>

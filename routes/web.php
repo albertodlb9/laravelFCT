@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ActionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,7 +22,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/hola', function () {
     return view ('hola');
 });
-
+Route::get('/actions/create/{id}', [ActionController::class, 'create'])->name('actions.create');
 Route::resource('actions', \App\Http\Controllers\ActionController::class);
 Route::resource('companies', \App\Http\Controllers\CompanyController::class);
 Route::resource('users', \App\Http\Controllers\UserController::class);

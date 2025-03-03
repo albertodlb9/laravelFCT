@@ -23,9 +23,7 @@ class ActionController extends Controller
      */
     public function create()
     {
-        $users = User::whereHas('rols', function ($query) {
-            $query->where('rols.id', 3); // ID del rol
-        })->get();
+        $users = User::all();
         return view('actions.create', compact('users'));
     }
 
@@ -35,6 +33,7 @@ class ActionController extends Controller
     public function store(Request $request)
     {
         Action::create($request->all());
+        return redirect()->route('actions.index');
     }
 
     /**
@@ -64,7 +63,7 @@ class ActionController extends Controller
     {
         $action = Action::find($id);
         $action->update($request->all());
-        return view('dashboard');
+        return redirect()->route('actions.index');
     }
 
     /**
@@ -73,5 +72,6 @@ class ActionController extends Controller
     public function destroy(string $id)
     {
         Action::destroy($id);
+        return redirect()->route('actions.index');
     }
 }

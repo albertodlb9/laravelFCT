@@ -15,12 +15,6 @@
         <label for="interval">Intervalo:</label>
         <input type="number" name="interval" id="interval" value="{{ $action->interval }}">
         <br>
-        <label for="user_id">Alumno:</label>
-        <select name="user_id" id="user_id">
-            @foreach ($users as $user)
-                <option value="{{ $user->id }}" {{ $user->id == $action->user_id ? 'selected' : '' }}>{{ $user->name }}</option>
-            @endforeach
-        </select>
         <button type="submit">Guardar Acción</button>
     </form>
 </x-app-layout>

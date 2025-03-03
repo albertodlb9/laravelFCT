@@ -74,7 +74,7 @@ class UserController extends Controller
             $query->where('rol_id', 2); // Aquí, role_id es la columna que relaciona el usuario con el rol
         })->get();
         $tutors = User::whereHas('rols', function($query) {
-            $query->where('rol_id', 3); // Aquí, role_id es la columna que relaciona el usuario con el rol
+            $query->where('rol_id', 4); // Aquí, role_id es la columna que relaciona el usuario con el rol
         })->get();
         $rolUser=$user->rols;
         $companyUser=$user->companies;
@@ -101,11 +101,10 @@ class UserController extends Controller
         ['rol_id' => $request->rol, 'company_id' => $request->company] // Datos a insertar o actualizar
     );
 
-    DB::table('pupils_teachers_tutors')->updateOrInsert([
-        'pupil_id' => $user->id,
-        'teacher_id' => $teacher->id,
-        'tutor_id' => $tutor->id,
-    ]);
+    DB::table('pupils_teachers_tutors')->updateOrInsert(
+        ['pupil_id' => $user->id],
+        ['teacher_id' => $teacher->id, 'tutor_id' => $tutor->id]
+    );
 
     
     $user->update($data);
