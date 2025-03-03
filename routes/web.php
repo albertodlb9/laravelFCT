@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,5 +25,7 @@ Route::get('/hola', function () {
 Route::resource('actions', \App\Http\Controllers\ActionController::class);
 Route::resource('companies', \App\Http\Controllers\CompanyController::class);
 Route::resource('users', \App\Http\Controllers\UserController::class);
+Route::post('/users/teach', [UserController::class, 'teach'])->name('users.teach');
+
 
 require __DIR__.'/auth.php';

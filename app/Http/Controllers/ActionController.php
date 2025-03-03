@@ -14,7 +14,8 @@ class ActionController extends Controller
     public function index()
     {
         $actions = Action::all();
-        return view('actions.index', compact('actions'));
+        $users = User::all();
+        return view('actions.index', compact('actions', 'users'));
     }
 
     /**

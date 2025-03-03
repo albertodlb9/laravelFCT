@@ -32,5 +32,39 @@
             </tbody>
         </table>
         @endif
+        @if(Auth::user()->hasRole('teacher','tutor'))
+        @foreach($users as $user)
+        @if(DB::table('pupils_teachers_tutors')->where('pupil_id', $user->id)->value('teacher_id') == Auth::user()->id || DB::table('pupils_teachers_tutors')->where('pupil_id', $user->id)->value('tutor_id') == Auth::user()->id)
+        @php $count = 0 @endphp
+        @foreach($actions as $action)   
+                    @if($action->user->id == $user->id)
+                        @php $count = $count + $action->interval @endphp
+                    @endif
+                @endforeach
+        <h2>Tareas de: {{$user->name}} {{$user->surname1}}  Duracion total: {{$count}} h</h2>
+        <table class="w-full border-collapse border border-gray-200 text-center">
+            <thead class="bg-gray-700">
+                <tr>
+                    <th class="p-3 border border-gray-300">Descripcion</th>
+                    <th class="p-3 border border-gray-300">Fecha</th>
+                    <th class="p-3 border border-gray-300">Duracion</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @foreach($actions as $action)
+                    @if($action->user->id == $user->id)
+                    <tr class="hover:bg-gray-100">
+                        <td class="p-3 border border-gray-300">{{ $action->description }}</td>
+                        <td class="p-3 border border-gray-300">{{ $action->date }}</td>
+                        <td class="p-3 border border-gray-300">{{ $action->interval }}</td>
+                    </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+        @endif
+        @endforeach
+        @endif
+
 
 </x-app-layout>

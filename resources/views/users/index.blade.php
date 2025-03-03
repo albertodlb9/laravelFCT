@@ -26,14 +26,14 @@
                             <td class="p-3 border border-gray-300">{{ $user->email }}</td>
                             <td class="p-3 border border-gray-300 flex gap-2">
                             <a href="{{ route('users.show', $user->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold btn">Mas info</a>
-                        @if(Auth::user()->hasRole('admin','teacher'))
-                            <a href="{{ route('users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold btn">Editar</a>
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition">Eliminar</button>
-                            </form>
-                        @endif
+                            @if(Auth::user()->hasRole('admin','teacher'))
+                                <a href="{{ route('users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold btn">Editar</a>
+                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition">Eliminar</button>
+                                </form>
+                            @endif
                         @elseif(Auth::user()->hasRole('admin'))
                             <tr class="hover:bg-gray-100">
                             <td class="p-3 border border-gray-300">{{ $user->name }}</td>
@@ -44,13 +44,13 @@
                             <td class="p-3 border border-gray-300 flex gap-2">
                             <a href="{{ route('users.show', $user->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold btn">Mas info</a>
                             @if(Auth::user()->hasRole('admin','teacher'))
-                            <a href="{{ route('users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold btn">Editar</a>
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition">Eliminar</button>
-                            </form>
-                        @endif
+                                <a href="{{ route('users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold btn">Editar</a>
+                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition">Eliminar</button>
+                                </form>
+                            @endif
                         @endif
                         </td>
                     </tr>

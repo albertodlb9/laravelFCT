@@ -70,9 +70,15 @@ class UserController extends Controller
         $user = User::find($id);
         $rols = Rol::all();
         $companies = Company::all();
+        $teachers = User::whereHas('rols', function($query) {
+            $query->where('rol_id', 2); // Aquí, role_id es la columna que relaciona el usuario con el rol
+        })->get();
+        $tutors = User::whereHas('rols', function($query) {
+            $query->where('rol_id', 3); // Aquí, role_id es la columna que relaciona el usuario con el rol
+        })->get();
         $rolUser=$user->rols;
         $companyUser=$user->companies;
-        return view('users.edit', compact('user', 'rols', 'companies','rolUser','companyUser'));
+        return view('users.edit', compact('user', 'rols', 'companies', 'teachers', 'tutors', 'rolUser', 'companyUser'));
     }
 
     /**
@@ -81,6 +87,8 @@ class UserController extends Controller
     public function update(Request $request, string $id)
 {
     $user = User::findOrFail($id);
+    $teacher = User::findOrFail($request->teacher);
+    $tutor = User::findOrFail($request->tutor);
 
     $data = $request->except('password'); 
     if ($request->filled('password')) { 
@@ -92,6 +100,13 @@ class UserController extends Controller
         ['user_id' => $user->id],  // Condición para buscar si ya existe
         ['rol_id' => $request->rol, 'company_id' => $request->company] // Datos a insertar o actualizar
     );
+
+    DB::table('pupils_teachers_tutors')->updateOrInsert([
+        'pupil_id' => $user->id,
+        'teacher_id' => $teacher->id,
+        'tutor_id' => $tutor->id,
+    ]);
+
     
     $user->update($data);
 
@@ -105,17 +120,5 @@ class UserController extends Controller
     {
         User::destroy($id);
         return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
-    }
-
-    public function changeRol(Request $request, string $id)
-    {
-
-        return view('dashboard');
-    }
-
-    public function changeCompany(Request $request, string $id)
-    {
-
-        return view('dashboard');
     }
 }

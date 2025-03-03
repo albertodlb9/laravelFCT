@@ -62,6 +62,24 @@
                 </select>
             </div>
 
+            <div>
+                <label for="tutor">Tutor</label>
+                <select name="tutor" id="tutor">
+                    @foreach($tutors as $tutor)
+                        <option value="{{$tutor->id}}" {{$user->tutor_id == $tutor->id ? 'selected' : ''}}>{{$tutor->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
+                <label for="teacher">Profesor:</label>
+                <select name="teacher" id="teacher">
+                    @foreach($teachers as $teacher)
+                        <option value="{{$teacher->id}}" {{$user->teacher_id == $teacher->id ? 'selected' : ''}}>{{$teacher->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="flex justify-end">
                 <button type="submit"
                     class="bg-green-600 px-4 py-2 rounded-md hover:bg-green-700 transition">
