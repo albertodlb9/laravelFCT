@@ -55,6 +55,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname1',
+        'surname2',
+        'tlfn',
         'email',
         'password',
     ];
@@ -81,4 +84,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hasRole(...$roles): bool
+{
+    foreach ($roles as $role) {
+        if ($this->rols->contains('name', $role)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 }

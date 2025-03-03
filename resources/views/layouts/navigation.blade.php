@@ -15,6 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('companies.index')" :active="request()->routeIs('companies.index')">
+                        {{ __('Compañias') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        {{ __('Usuarios') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('actions.index')" :active="request()->routeIs('actions.index')">
+                        {{ __('Tareas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('companies.create')" :active="request()->routeIs('companies.create')">
+                        {{ __('Relaciones') }}
+                    </x-nav-link>
                 </div>
             </div>
 

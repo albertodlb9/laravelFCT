@@ -13,7 +13,8 @@ class ActionController extends Controller
      */
     public function index()
     {
-        return Action::all();
+        $actions = Action::all();
+        return view('actions.index', compact('actions'));
     }
 
     /**
@@ -21,7 +22,10 @@ class ActionController extends Controller
      */
     public function create()
     {
-        return view('actions.create');
+        $users = User::whereHas('rols', function ($query) {
+            $query->where('rols.id', 3); // ID del rol
+        })->get();
+        return view('actions.create', compact('users'));
     }
 
     /**
@@ -46,8 +50,10 @@ class ActionController extends Controller
     public function edit(string $id)
     {
         $action = Action::find($id);
-        $pupils = User::where('rol_id', '2')->get();
-        return view('actions.edit', compact('data', 'pupils'));
+        $users = User::whereHas('rols', function ($query) {
+            $query->where('rols.id', 3); // ID del rol
+        })->get();
+        return view('actions.edit', compact('action', 'users'));
     }
 
     /**
@@ -57,6 +63,7 @@ class ActionController extends Controller
     {
         $action = Action::find($id);
         $action->update($request->all());
+        return view('dashboard');
     }
 
     /**

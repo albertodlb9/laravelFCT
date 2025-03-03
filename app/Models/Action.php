@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Action extends Model
 {
+    protected $fillable = ['date', 'description', 'interval', 'user_id'];
     //
     public function user():BelongsTo
     {

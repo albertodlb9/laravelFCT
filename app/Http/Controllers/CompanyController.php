@@ -12,7 +12,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::all();
+        $companies=Company::all();
+        return view('companies.index', compact('companies'));
     }
 
     /**
@@ -29,6 +30,7 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         Company::create($request->all());
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -55,6 +57,7 @@ class CompanyController extends Controller
     {
         $company = Company::find($id);
         $company->update($request->all());
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -62,6 +65,7 @@ class CompanyController extends Controller
      */
     public function destroy(string $id)
     {
-        $company = Company::destroy($id);
+        Company::destroy($id);
+        return redirect()->route('companies.index');
     }
 }

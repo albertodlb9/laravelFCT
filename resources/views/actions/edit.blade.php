@@ -17,7 +17,7 @@
         <br>
         <label for="user_id">Alumno:</label>
         <select name="user_id" id="user_id">
-            @foreach ($pupils as $user)
+            @foreach ($users as $user)
                 <option value="{{ $user->id }}" {{ $user->id == $action->user_id ? 'selected' : '' }}>{{ $user->name }}</option>
             @endforeach
         </select>
