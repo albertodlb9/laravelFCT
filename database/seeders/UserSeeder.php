@@ -26,6 +26,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('manolillo'),
             'surname1' => 'el profe'
         ]);
+        \App\Models\User::create([
+            'name' => 'manolillo2',
+            'email' => 'manolillo2@local.lo',
+            'password' => bcrypt('manolillo2'),
+            'surname1' => 'el profe2'
+        ]);
         //alumno
         \App\Models\User::create([
             'name' => 'pepito',
@@ -33,12 +39,24 @@ class UserSeeder extends Seeder
             'password' => bcrypt('pepito'),
             'surname1' => 'el alumno'
         ]);
+        \App\Models\User::create([
+            'name' => 'pepito2',
+            'email' => 'pepito2@local.lo',
+            'password' => bcrypt('pepito'),
+            'surname1' => 'el alumno2'
+        ]);
         //tutor
         \App\Models\User::create([
             'name' => 'tutor',
             'email' => 'tutor@empresa.com',
             'password' => bcrypt('tutor'),
             'surname1' => 'el tutor'
+        ]);
+        \App\Models\User::create([
+            'name' => 'tutor2',
+            'email' => 'tutor2@empresa.com',
+            'password' => bcrypt('tutor'),
+            'surname1' => 'el tutor2'
         ]);
 
     }

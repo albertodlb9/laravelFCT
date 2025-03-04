@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\PdfController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,6 +53,7 @@ Route::middleware('role:teacher,pupil')->group(function () {
     Route::delete('actions/{action}', [ActionController::class, 'destroy'])->name('actions.destroy');
     Route::post('actions', [ActionController::class, 'store'])->name('actions.store');
     Route::patch('actions/{action}', [ActionController::class, 'update'])->name('actions.update');
+    Route::get('/generar-pdf', [PdfController::class, 'generarPDF'])->name('pdf.generar');
 });
 
 Route::middleware('role:admin,teacher')->group(function () {
