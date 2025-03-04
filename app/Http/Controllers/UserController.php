@@ -88,8 +88,8 @@ class UserController extends Controller
     public function update(Request $request, string $id)
 {
     $user = User::findOrFail($id);
-    $teacher = User::findOrFail($request->teacher);
-    $tutor = User::findOrFail($request->tutor);
+    $teacher = User::find($request->teacher);
+    $tutor = User::find($request->tutor);
 
     $data = $request->except('password'); 
     if ($request->filled('password')) { 
@@ -98,13 +98,13 @@ class UserController extends Controller
         $data['password'] = $user->password; 
     }
 
-        
-        DB::table('pupils_teachers_tutors')->updateOrInsert(
-        ['pupil_id' => $user->id],
-        ['teacher_id' => $teacher->id, 'tutor_id' => $tutor->id]
-        );
+        if($user->HasRole('pupil')){
+            DB::table('pupils_teachers_tutors')->updateOrInsert(
+                ['pupil_id' => $user->id],
+                ['teacher_id' => $teacher->id, 'tutor_id' => $tutor->id]
+            );
+        }
     
-
     DB::table('companies_roles_users')->updateOrInsert(
         ['user_id' => $user->id],  
         ['rol_id' => $request->rol, 'company_id' => $request->company] 
