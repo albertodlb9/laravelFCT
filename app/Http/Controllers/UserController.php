@@ -12,6 +12,7 @@ use App\Models\Company;
 
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -71,10 +72,10 @@ class UserController extends Controller
         $rols = Rol::all();
         $companies = Company::all();
         $teachers = User::whereHas('rols', function($query) {
-            $query->where('rol_id', 2); // Aquí, role_id es la columna que relaciona el usuario con el rol
+            $query->where('rol_id', 2); 
         })->get();
         $tutors = User::whereHas('rols', function($query) {
-            $query->where('rol_id', 4); // Aquí, role_id es la columna que relaciona el usuario con el rol
+            $query->where('rol_id', 4); 
         })->get();
         $rolUser=$user->rols;
         $companyUser=$user->companies;
@@ -97,8 +98,8 @@ class UserController extends Controller
         $data['password'] = $user->password; 
     }
     DB::table('companies_roles_users')->updateOrInsert(
-        ['user_id' => $user->id],  // Condición para buscar si ya existe
-        ['rol_id' => $request->rol, 'company_id' => $request->company] // Datos a insertar o actualizar
+        ['user_id' => $user->id],  
+        ['rol_id' => $request->rol, 'company_id' => $request->company] 
     );
 
     DB::table('pupils_teachers_tutors')->updateOrInsert(

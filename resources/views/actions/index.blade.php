@@ -98,11 +98,13 @@
         @endif
         
         @endforeach
+        @if(Auth::user()->hasRole('teacher'))
         <div class="mt-4">
             <a href="{{ route('actions.create',$user->id) }}" class="inline-block bg-green px-4 py-2 rounded-md hover:bg-green-700 transition">
                 Crear Tarea
             </a>
         </div>
+        @endif
         @endif
 </div>
 
