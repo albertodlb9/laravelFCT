@@ -28,14 +28,7 @@ class CheckRole
 
         $user = Auth::user();
 
-        if (in_array('tutor', $roles) && $request->is('users/create')) {
-            // Redirigir a 'users.index' si intenta acceder a 'create'
-            return redirect()->route('users.index');
-        }
-        if (in_array('tutor', $roles) && $request->is('actions/create')) {
-            // Redirigir a 'users.index' si intenta acceder a 'create'
-            return redirect()->route('actions.index');
-        }
+        
         // Si el usuario no tiene alguno de los roles, redirige o retorna un error
         if (!$user->rols()->whereIn('name', $roles)->exists()) {
             return redirect()->route('dashboard'); // Respuesta de "no autorizado"

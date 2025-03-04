@@ -80,9 +80,9 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" class="rounded-md">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="rounded-md">Log in</a>
+                        <a href="{{ route('login') }}" class="rounded-md">Acceder</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="rounded-md">Register</a>
+                            <a href="{{ route('register') }}" class="rounded-md">Registrarse</a>
                         @endif
                     @endauth
                 </nav>

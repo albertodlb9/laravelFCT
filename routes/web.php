@@ -20,17 +20,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('role:admin,teacher,tutor')->group(function () {
+
+
+Route::middleware('role:tutor')->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/create', function(){
+        return route('users.index');
+    });
     Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 });
 
 Route::middleware('role:admin,teacher')->group(function () {
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('users.create');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('users', [UserController::class, 'store'])->name('users.store');
-    Route::patch('users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 });
 
 
@@ -47,7 +54,7 @@ Route::middleware('role:teacher,pupil')->group(function () {
     Route::patch('actions/{action}', [ActionController::class, 'update'])->name('actions.update');
 });
 
-Route::middleware('role:admin')->group(function () {
+Route::middleware('role:admin,teacher')->group(function () {
     Route::get('companies', [CompanyController::class, 'index'])->name('companies.index');
     Route::get('companies/create', [CompanyController::class, 'create'])->name('companies.create');
     Route::post('companies', [CompanyController::class, 'store'])->name('companies.store');

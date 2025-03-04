@@ -97,17 +97,19 @@ class UserController extends Controller
     } else {
         $data['password'] = $user->password; 
     }
+
+        
+        DB::table('pupils_teachers_tutors')->updateOrInsert(
+        ['pupil_id' => $user->id],
+        ['teacher_id' => $teacher->id, 'tutor_id' => $tutor->id]
+        );
+    
+
     DB::table('companies_roles_users')->updateOrInsert(
         ['user_id' => $user->id],  
         ['rol_id' => $request->rol, 'company_id' => $request->company] 
     );
 
-    DB::table('pupils_teachers_tutors')->updateOrInsert(
-        ['pupil_id' => $user->id],
-        ['teacher_id' => $teacher->id, 'tutor_id' => $tutor->id]
-    );
-
-    
     $user->update($data);
 
     return redirect()->route('users.index');
